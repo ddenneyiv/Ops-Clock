@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Operations Clock Ticker</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #000000;
+      color: #FF0000;
+      font-family: 'Courier New', Courier, monospace;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .ticker-container {
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+      padding: 20px 10px;
+    }
+    .clock-column {
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid #330000;
+      padding: 0 5px;
+    }
+    .clock-column:last-child {
+      border-right: none;
+    }
+    .location-label {
+      font-size: 1.5vw;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      color: #FF0000;
+      text-transform: uppercase;
+    }
+    .time-display {
+      font-size: 3vw;
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: #FF0000;
+      text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+    }
+    .sec-display {
+      font-size: 1.5vw;
+      color: #CC0000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ticker-container">
+    <div class="clock-column">
+      <div class="location-label">Los Angeles</div>
+      <div class="time-display" id="clock-la">00:00</div>
+    </div>
+    <div class="clock-column">
+      <div class="location-label">Guatemala</div>
+      <div class="time-display" id="clock-guatemala">00:00</div>
+    </div>
+    <div class="clock-column">
+      <div class="location-label">Jamaica</div>
+      <div class="time-display" id="clock-jamaica">00:00</div>
+    </div>
+    <div class="clock-column">
+      <div class="location-label">New York</div>
+      <div class="time-display" id="clock-ny">00:00</div>
+    </div>
+    <div class="clock-column">
+      <div class="location-label">St. Lucia</div>
+      <div class="time-display" id="clock-stlucia">00:00</div>
+    </div>
+    <div class="clock-column">
+      <div class="location-label">Fiji</div>
+      <div class="time-display" id="clock-fiji">00:00</div>
+    </div>
+  </div>
+
+  <script>
+    function updateClocks() {
+      const zones = [
+        { id: 'clock-la', timeZone: 'America/Los_Angeles' },
+        { id: 'clock-guatemala', timeZone: 'America/Guatemala' },
+        { id: 'clock-jamaica', timeZone: 'America/Jamaica' },
+        { id: 'clock-ny', timeZone: 'America/New_York' },
+        { id: 'clock-stlucia', timeZone: 'America/St_Lucia' },
+        { id: 'clock-fiji', timeZone: 'Pacific/Fiji' }
+      ];
+
+      const now = new Date();
+
+      zones.forEach(zone => {
+        const formatter = new Intl.DateTimeFormat('en-GB', {
+          timeZone: zone.timeZone,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false
+        });
+
+        const timeParts = formatter.formatToParts(now);
+        let h = '', m = '', s = '';
+        
+        timeParts.forEach(part => {
+          if (part.type === 'hour') h = part.value;
+          if (part.type === 'minute') m = part.value;
+          if (part.type === 'second') s = part.value;
+        });
+
+        const elem = document.getElementById(zone.id);
+        if (elem) {
+          elem.innerHTML = `${h}:${m}<span class="sec-display">:${s}</span>`;
+        }
+      });
+    }
+
+    setInterval(updateClocks, 1000);
+    updateClocks();
+  </script>
+
+</body>
+</html>
