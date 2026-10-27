@@ -37,7 +37,7 @@
       border-right: none;
     }
     .location-label {
-      font-size: 1.5vw;
+      font-size: 1.3vw;
       font-weight: bold;
       letter-spacing: 2px;
       margin-bottom: 15px;
@@ -45,14 +45,14 @@
       text-transform: uppercase;
     }
     .time-display {
-      font-size: 3vw;
+      font-size: 2.6vw;
       font-weight: bold;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       color: #FF0000;
       text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
     }
     .sec-display {
-      font-size: 1.5vw;
+      font-size: 1.3vw;
       color: #CC0000;
     }
   </style>
@@ -61,8 +61,8 @@
 
   <div class="ticker-container">
     <div class="clock-column">
-      <div class="location-label">Los Angeles</div>
-      <div class="time-display" id="clock-la">00:00</div>
+      <div class="location-label">San Francisco</div>
+      <div class="time-display" id="clock-sf">00:00</div>
     </div>
     <div class="clock-column">
       <div class="location-label">Guatemala</div>
@@ -73,12 +73,16 @@
       <div class="time-display" id="clock-jamaica">00:00</div>
     </div>
     <div class="clock-column">
-      <div class="location-label">New York</div>
-      <div class="time-display" id="clock-ny">00:00</div>
+      <div class="location-label">Charlotte</div>
+      <div class="time-display" id="clock-charlotte">00:00</div>
     </div>
     <div class="clock-column">
       <div class="location-label">St. Lucia</div>
       <div class="time-display" id="clock-stlucia">00:00</div>
+    </div>
+    <div class="clock-column">
+      <div class="location-label">GMT</div>
+      <div class="time-display" id="clock-gmt">00:00</div>
     </div>
     <div class="clock-column">
       <div class="location-label">Fiji</div>
@@ -89,11 +93,12 @@
   <script>
     function updateClocks() {
       const zones = [
-        { id: 'clock-la', timeZone: 'America/Los_Angeles' },
+        { id: 'clock-sf', timeZone: 'America/Los_Angeles' },
         { id: 'clock-guatemala', timeZone: 'America/Guatemala' },
         { id: 'clock-jamaica', timeZone: 'America/Jamaica' },
-        { id: 'clock-ny', timeZone: 'America/New_York' },
+        { id: 'clock-charlotte', timeZone: 'America/New_York' },
         { id: 'clock-stlucia', timeZone: 'America/St_Lucia' },
+        { id: 'clock-gmt', timeZone: 'UTC' },
         { id: 'clock-fiji', timeZone: 'Pacific/Fiji' }
       ];
 
